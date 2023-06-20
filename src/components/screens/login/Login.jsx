@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+
+import LoginForm from './loginForm/LoginForm';
 
 const Login = () => (
   <div className="d-flex justify-content-around align-items-center">
@@ -12,17 +12,7 @@ const Login = () => (
       >
         <Card.Title className="fs-2 fw-bolder mt-2 text-secondary">Вход</Card.Title>
         <Card.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control type="email" placeholder="Login" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Button variant="outline-secondary" className="d-flex">
-              Войти
-            </Button>{' '}
-          </Form>
+          <LoginForm />
         </Card.Body>
       </Card>
     </div>
