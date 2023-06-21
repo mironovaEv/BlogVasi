@@ -4,6 +4,9 @@ const GET_POSTS = 'GET_POSTS';
 
 const initialState = {
   posts: [],
+  currentPage: 0,
+  totalCountPage: 0,
+  pageSize: 0,
 };
 
 const wallReducer = (state = initialState, action) => {
@@ -11,21 +14,31 @@ const wallReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POSTS:
       newState.posts = action.posts;
+      newState.currentPage = action.currentPage;
+      newState.totalCountPage = action.totalCountPage;
+      newState.pageSize = action.pageSize;
       return newState;
     default:
       return newState;
   }
 };
 
-export function GetPostsActionCreator(posts) {
-  return { type: GET_POSTS, posts };
+export function GetPostsActionCreator(posts, currentPage, totalCountPage, pageSize) {
+  return { type: GET_POSTS, posts, currentPage, totalCountPage, pageSize };
 }
 
-export function GetPostsThunkCreator() {
+export function GetPostsThunkCreator(number) {
   return (dispatch) => {
-    wallApi.getPosts().then((resp) => {
+    wallApi.getPosts(number).then((resp) => {
       if (resp) {
-        dispatch(GetPostsActionCreator(resp.posts));
+        dispatch(
+          GetPostsActionCreator(
+            resp.posts,
+            resp.pagination.currentPage,
+            resp.pagination.totalCountPage,
+            resp.pagination.pageSize,
+          ),
+        );
       }
     });
   };

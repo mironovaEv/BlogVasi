@@ -4,9 +4,9 @@ const instance = axios.create({
   baseURL: `https://localhost:7190/api`,
 });
 
-function getPosts(number) {
+function getPost(id) {
   return instance
-    .get(`/wall/wall?CurrentPage=${number}`)
+    .get(`/wall/post/${id}`)
     .then(async (response) => {
       if (response.status === 200) {
         return response.data;
@@ -17,6 +17,6 @@ function getPosts(number) {
     });
 }
 
-export const wallApi = {
-  getPosts,
+export const postApi = {
+  getPost,
 };

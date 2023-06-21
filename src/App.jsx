@@ -2,16 +2,22 @@ import { Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
 import NavBar from './components/navbar/Navbar';
-const Home = lazy(() => import('./components/screens/home/Home'));
+const HomeContainer = lazy(() => import('./components/screens/home/HomeContainer'));
 const Login = lazy(() => import('./components/screens/login/Login'));
+const PostContainer = lazy(() => import('./components/screens/post/PostContainer'));
 
 const App = () => (
   <>
     <NavBar />
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<HomeContainer />}>
+          <Route path=":number" element={<HomeContainer />} />
+        </Route>
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/post">
+          <Route path=":id" element={<PostContainer />} />
+        </Route>
       </Routes>
     </Suspense>
   </>

@@ -1,23 +1,18 @@
+/* eslint-disable react/prop-types */
+import dateFormat from 'dateformat';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
-const Post = () => (
-  <Card style={{ width: '40rem' }}>
+const Post = ({ id, title, picture, createdDate }) => (
+  <Card as={Link} to={`/post/${id}`} style={{ width: '50rem' }} className="mt-3 col text-decoration-none">
     <Card.Body>
       <div className="d-flex justify-content-between">
-        <Card.Title>Заголовок поста</Card.Title>
-        <Card.Text className="text-muted">1 час назад</Card.Text>
+        <Card.Title className="fs-4">{title}</Card.Title>
+        <Card.Text className="text-muted">{dateFormat(createdDate, 'mmm d, yyyy')}</Card.Text>
       </div>
-      <Card.Text>Текст поста</Card.Text>
+
+      <img src={picture} />
     </Card.Body>
-    <Card.Footer className="bg-white d-flex justify-content-between">
-      <Button variant="outline-secondary" className="d-flex px-2">
-        <img width="20" height="20" className="p-0" src="public/comment.png"></img>
-      </Button>
-      <Button variant="outline-secondary" className="d-flex p-1 ">
-        <img width="15" height="15" className="m-1 " src="public/share.png"></img>
-      </Button>
-    </Card.Footer>
   </Card>
 );
 
