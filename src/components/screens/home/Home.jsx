@@ -1,16 +1,21 @@
 /* eslint-disable react/prop-types */
+import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
+import { useSelector } from 'react-redux';
 import Pagination from 'react-bootstrap/Pagination';
 import Post from './Post';
 import Button from 'react-bootstrap/Button';
+import CreatePostModal from './CreatePostModal';
 
 const Home = ({ posts, currentPage, totalCountPage }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const isAuth = !!useSelector((state) => state.isAuth);
   let active = currentPage;
-  console.log(posts);
   let items = [];
   for (let number = 1; number <= totalCountPage; number++) {
     items.push(
-      <Pagination.Item href={`/${number}`} key={number} active={number === active}>
+      <Pagination.Item className="page-item" href={`/${number}`} key={number} active={number === active}>
         {number}
       </Pagination.Item>,
     );
@@ -19,7 +24,12 @@ const Home = ({ posts, currentPage, totalCountPage }) => {
     <Container className="container-sm d-flex justify-content-center  mt-4 ">
       <div>
         <div className="d-flex justify-content-end">
-          <Button type="button" variant="outline-secondary">
+          <Button
+            type="button"
+            variant="outline-secondary"
+            onClick={() => setShow(true)}
+            className={`${isAuth ? '' : 'd-none'} `}
+          >
             Создать пост
           </Button>
         </div>
@@ -35,9 +45,10 @@ const Home = ({ posts, currentPage, totalCountPage }) => {
           );
         })}
         <div className="mt-4 d-flex justify-content-center">
-          <Pagination>{items}</Pagination>
+          <Pagination className="pg-red">{items}</Pagination>
         </div>
       </div>
+      <CreatePostModal show={show} onHide={handleClose} />
     </Container>
   );
 };

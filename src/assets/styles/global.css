@@ -1,0 +1,26 @@
+.page-item.active .page-link {
+  color: #fff !important;
+  background: #97bffa !important;
+  border: 0;
+}
+
+.blue-btn {
+  color: #83b5ff !important;
+  border: 1px solid #83b5ff !important;
+}
+
+.blue-btn:hover {
+  background: #83b5ff !important;
+  color: #fff !important;
+}
+.short-post:hover {
+  transform: scale(1.015);
+}
+.post-img {
+  text-align: center;
+}
+.big-picture {
+  max-height: 450px;
+
+  object-fit: contain;
+}

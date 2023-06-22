@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import Email from './Email';
 import Password from './Password';
-import { LoginThunkCreator } from '../../../../reducers/account-reducer';
+import { LoginThunkCreator } from '../../../../reducers/reducer';
 
 function LoginForm() {
   const navigate = useNavigate();

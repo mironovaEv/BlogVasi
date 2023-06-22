@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { GetPostsThunkCreator } from '../../../reducers/wall-reducer';
+import { GetPostsThunkCreator } from '../../../reducers/reducer';
 import Home from './Home';
 
 function MiddlePostsComponent(props) {
@@ -17,7 +17,11 @@ function MiddlePostsComponent(props) {
 }
 
 function MapStateToProps(state) {
-  return { posts: state.wall.posts, currentPage: state.wall.currentPage, totalCountPage: state.wall.totalCountPage };
+  return {
+    posts: state.posts,
+    currentPage: state.currentPage,
+    totalCountPage: state.totalCountPage,
+  };
 }
 const PostsContainer = connect(MapStateToProps, { GetPostsThunkCreator })(MiddlePostsComponent);
 

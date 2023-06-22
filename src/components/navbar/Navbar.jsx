@@ -1,10 +1,18 @@
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
+import { useDispatch, useSelector } from 'react-redux';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import { LogoutThunkCreator } from '../../reducers/reducer';
 
 const NavBar = () => {
-  const isAuth = !!localStorage.getItem('accessToken');
+  const isAuth = !!useSelector((state) => state.isAuth);
+
+  const dispatch = useDispatch();
+
+  function onclick() {
+    dispatch(LogoutThunkCreator());
+  }
   return (
     <Navbar expand="lg" className="bg-primary bg-opacity-25 p-0">
       <Container fluid>
@@ -13,7 +21,7 @@ const NavBar = () => {
           <Navbar.Text className="ps-4 fs-3">Блог Васи Пупкина</Navbar.Text>
         </Navbar.Brand>
 
-        <Button as={Link} to="/login" variant="outline-secondary" className={`${isAuth ? '' : 'd-none'}`}>
+        <Button as={Link} to="/1" variant="outline-secondary" onClick={onclick} className={`${isAuth ? '' : 'd-none'}`}>
           Выход
         </Button>
         <Button as={Link} to="/login" variant="outline-secondary" className={`${isAuth ? 'd-none' : ''}`}>

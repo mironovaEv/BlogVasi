@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const instance = axios.create({
-  baseURL: `https://localhost:7190/api`,
-});
+import { instance } from '../api.config';
 
 function getPost(id) {
   return instance
